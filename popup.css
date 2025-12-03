@@ -1,0 +1,926 @@
+/* Basic reset and layout */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
+
+.container { display: flex; width: 700px; height: 420px; }
+
+/* Left panel (branding) */
+.left {
+	flex: 1;
+	background: linear-gradient(180deg,#3fd0ff,#2b8df6);
+	color: white;
+	padding: 32px;
+	position: relative;
+}
+.left h1 { font-size: 36px; margin: 4px 0 8px; } /* tightened spacing after removing .logo */
+.left .lead { font-size: 13px; opacity: 0.95; max-width: 260px; margin-top: 10px; }
+.left .bottom-note { position: absolute; bottom: 12px; left: 24px; font-size: 12px; opacity: 0.9; }
+
+/* Right panel (controls) */
+.right { flex: 1; background: #fff; padding: 36px; display: flex; align-items: center; justify-content: center; }
+.card {
+	width: 80%;
+}
+.card h2 { color: #2a7bdc; margin-bottom: 6px; font-size: 32px; }
+.card .sub { color: #888; font-size: 13px; margin-bottom: 14px; }
+label { display: block; font-size: 12px; color: #888; margin-top: 8px; }
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	margin-top: 6px;
+	font-size: 14px;
+}
+.row { margin: 8px 0; display:flex; align-items:center; }
+.remember { font-size: 13px; color:#666; }
+button {
+	margin-top: 12px;
+	background: #2a8df6;
+	color: #fff;
+	border: none;
+	padding: 12px;
+	width: 100%;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 700;
+}
+.links { margin-top: 12px; font-size: 12px; color: #999; }
+.hidden { display: none; }
+#status-title { color: #2a8dfc; margin-bottom: 8px; }
+
+/* --- New styles for login look --- */
+.login-btn {
+	background: linear-gradient(180deg,#2b8df6,#1e73d8);
+	color: #fff;
+	padding: 14px;
+	border-radius: 10px;
+	font-size: 18px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	box-shadow: 0 6px 18px rgba(43,141,246,0.25);
+	border: none;
+}
+
+/* opt-out class to prevent forced uppercase on specific buttons */
+.no-transform {
+	text-transform: none !important;
+}
+
+.links-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 13px;
+	margin-top: 10px;
+}
+.links-footer .left-link { color: #666; }
+.links-footer .left-link a { color: #2b8df6; text-decoration: none; font-weight: 600; }
+.links-footer .right-link a { color: #999; text-decoration: none; font-style: italic; }
+
+/* Checkbox minimal styling */
+input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+
+/* Ensure popup fits small widths too */
+@media (max-width: 420px) {
+	.container { width: 360px; height: auto; flex-direction: column; }
+	.left { padding: 20px; }
+	.right { padding: 20px; }
+	.card { width: 100%; }
+}
+
+/* New hero title + slogan (spacing adjusted) */
+.hero-title {
+	font-size: 68px; /* increased for stronger emphasis */
+	font-weight: 800;
+	margin: 4px 0 6px;
+	letter-spacing: -0.5px;
+	color: #ffffff;
+	text-shadow: 0 4px 14px rgba(0,0,0,0.18);
+	transform-origin: center;
+	animation: floatPulse 3.5s ease-in-out infinite;
+}
+.hero-slogan {
+	font-size: 14px;
+	opacity: 0.95;
+	max-width: 320px;
+	margin-top: 8px;
+	line-height: 1.3;
+	color: rgba(255,255,255,0.95);
+	opacity: 0;
+	transform: translateY(6px);
+	animation: fadeUp 0.9s ease-out 0.5s forwards;
+}
+
+/* animations */
+@keyframes floatPulse {
+	0% { transform: translateY(0) scale(1); }
+	50% { transform: translateY(-6px) scale(1.02); }
+	100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeUp {
+	0% { opacity: 0; transform: translateY(6px); }
+	100% { opacity: 1; transform: translateY(0); }
+}
+
+/* center hero content inside left panel */
+.hero-center {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0 8px;
+}
+
+/* Make the scan-view header more prominent */
+/* Removed #scanView h3 rules because scan UI was removed */
+
+.hero-border {
+  /* removed visible border and extra padding so inner rounded box no longer appears */
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: block;
+}
+
+/* Disable hero animations for Signup view (removes floating/fade for "Create Account") */
+#signupView .hero-title {
+	animation: none !important;
+	transform: none !important;
+	/* reduced size for signup header */
+	font-size: 36px;
+}
+
+#signupView .hero-slogan {
+	animation: none !important;
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+#forgotView .hero-title {
+	animation: none !important;
+	transform: none !important;
+	font-size: 24px; /* reduced so "Reset Password" fits on one line */
+}
+
+#forgotView .hero-slogan {
+	animation: none !important;
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+/* increase right padding so toggle doesn't overlap text and matches larger button */
+.password-field input {
+  width: 100%;
+  padding-right: 56px; /* extra space so toggle doesn't overlap text */
+}
+/* stronger, slightly elevated toggle so it visually aligns with your screenshot's red-mark */
+.toggle-pass {
+  position: absolute;
+  right: 12px;               /* a bit inset from the edge */
+  top: 32%;                 /* nudge slightly upward for visual centering */
+  transform: translateY(-50%);
+  width: 32px;              /* larger hit target */
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e74c3c; /* red circle like your screenshot */
+  background: rgba(255,255,255,0.98);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+.toggle-pass svg { display:block; width:18px; height:18px; }
+/* hover and focus affordances */
+.toggle-pass:hover { transform: translateY(-52%) scale(1.02); box-shadow: 0 10px 24px rgba(0,0,0,0.10); }
+.toggle-pass:focus { outline: none; box-shadow: 0 0 0 4px rgba(231,76,60,0.12); }
+/* when visible, make circle filled slightly and icon clear */
+.toggle-pass.visible {
+  background: #e74c3c;
+  border-color: #e74c3c;
+}
+.toggle-pass.visible svg { stroke: #fff; }
+/* ensure toggle is accessible (button inside input wrapper) */
+.password-field .toggle-pass { z-index: 2; }
+
+/* Toast notifications (centered above header by default; JS will position under hero) */
+#toast-container {
+  /* position will be set by JS to align with hero; keep defaults for layout */
+  position: fixed; /* JS will override top/left as needed */
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  width: auto;
+  max-width: 88%;
+  align-items: center;
+  /* top/left/transform intentionally not hard-coded so showToast can anchor to hero */
+}
+.toast {
+  min-width: 200px;
+  max-width: 640px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(13, 71, 161, 0.12);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  position: relative;
+  overflow: visible; /* allow pointer to show */
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.success { background: linear-gradient(90deg,#34c38f,#2eb86e); }
+.toast.error { background: linear-gradient(90deg,#f46a6a,#d64545); }
+
+/* Toast variants, icon, action and close styles */
+.toast.info { background: linear-gradient(90deg,#4da1ff,#2f8fff); }
+.toast.warning { background: linear-gradient(90deg,#ffb84d,#ff8c2b); }
+
+.toast .toast-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.98;
+  flex: 0 0 20px;
+}
+.toast .toast-text { flex: 1; font-weight:700; font-size:14px; line-height:1.2; color: #fff; }
+
+/* action button inside toast (small, subtle) */
+.toast .toast-action {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background 120ms ease, transform 120ms ease;
+}
+.toast .toast-action:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+
+/* close button */
+.toast .toast-close {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border: none;
+  font-size: 14px;
+  padding: 4px 6px;
+  margin-left: 8px;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+/* pointer color per variant (triangle under toast) */
+.toast.info::after { border-top-color: rgba(47,143,255,0.95); }
+.toast.warning::after { border-top-color: rgba(255,140,43,0.95); }
+
+/* interactive / hover effect */
+.toast:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.16); }
+
+/* ensure toast container allows stacked toasts and keeps pointer aligned */
+#toast-container { align-items: center; pointer-events: none; }
+#toast-container .toast { pointer-events: auto; width: auto; max-width: 520px; }
+
+/* Slight spacing for stacked toasts so pointers remain visible */
+.toast { margin-bottom: 18px; }
+
+/* Scan view tweaks */
+#scanView .hero-title { font-size: 28px; color: #fff; }
+#scanView .hero-slogan { color: rgba(255,255,255,0.95); margin-top:4px; }
+
+/* Button group in scanner */
+.button-group button.login-btn { padding: 8px 12px; font-size: 13px; }
+.button-group select { font-size: 13px; }
+
+/* Results table — make table fill the available card area and reduce side margins */
+#scanView .card {
+  width: 100%;
+  padding: 8px; /* tighten card padding for scan view so table can grow */
+}
+
+/* table container: remove inner horizontal padding and allow taller scrolling area */
+.table-container {
+  background: #fff;
+  border-radius: 6px;
+  overflow: auto;
+  border: 1px solid #e6e6e6;
+  padding: 0;              /* remove extra inner padding so table reaches edges */
+  margin: 0;               /* remove external spacing */
+  max-height: 320px;       /* increase height so table shows more rows */
+}
+
+/* tighten cell padding so table fits better horizontally */
+#resultsTable th, #resultsTable td {
+  padding: 6px 8px; /* slightly more horizontal space than before */
+}
+
+/* ensure table uses full width of container */
+#resultsTable {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* keep header sticky and visible above scrolling rows */
+#resultsTable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+}
+
+/* Status column slightly narrower to reduce left margin */
+#resultsTable td:first-child { font-weight: 700; width: 100px; text-transform: uppercase; padding-left: 6px; }
+
+/* Target column narrower */
+#resultsTable td:nth-child(3) { width: 110px; }
+
+/* Payload snippet narrower so table columns fit better */
+.payload-cell {
+  display: inline-block;
+  max-width: 200px; /* reduced from 260px */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+/* ensure the payload full-view stays usable */
+.detail-payload { max-width: 100%; }
+
+/* VULNERABLE -> pink */
+#resultsTable tbody tr.VULNERABLE td,
+#resultsTable tbody tr.vulnerable td,
+#resultsTable tbody tr[data-status="VULNERABLE"] td,
+#resultsTable tbody tr[data-status="vulnerable"] td {
+  background: #ffdfe6;
+  color: #6b1e28;
+}
+#resultsTable tbody tr.VULNERABLE td:nth-child(4) .payload-cell,
+#resultsTable tbody tr.vulnerable td:nth-child(4) .payload-cell {
+  background: rgba(255, 230, 235, 1);
+}
+
+/* SUSPICIOUS -> peach */
+#resultsTable tbody tr.SUSPICIOUS td,
+#resultsTable tbody tr.suspicious td,
+#resultsTable tbody tr[data-status="SUSPICIOUS"] td,
+#resultsTable tbody tr[data-status="suspicious"] td {
+  background: #fff0dc;
+  color: #6a3b00;
+}
+#resultsTable tbody tr.SUSPICIOUS td:nth-child(4) .payload-cell,
+#resultsTable tbody tr.suspicious td:nth-child(4) .payload-cell {
+  background: rgba(255, 244, 229, 1);
+}
+
+/* SAFE -> green */
+#resultsTable tbody tr.SAFE td,
+#resultsTable tbody tr.safe td,
+#resultsTable tbody tr[data-status="SAFE"] td,
+#resultsTable tbody tr[data-status="safe"] td {
+  background: #e9fff3;
+  color: #1b5e20;
+}
+#resultsTable tbody tr.SAFE td:nth-child(4) .payload-cell,
+#resultsTable tbody tr.safe td:nth-child(4) .payload-cell {
+  background: rgba(237, 255, 245, 1);
+}
+
+/* FAILED -> yellow */
+#resultsTable tbody tr.FAILED td,
+#resultsTable tbody tr.failed td,
+#resultsTable tbody tr[data-status="FAILED"] td,
+#resultsTable tbody tr[data-status="failed"] td {
+  background: #fff6d6;
+  color: #6a4b00;
+}
+#resultsTable tbody tr.FAILED td:nth-child(4) .payload-cell,
+#resultsTable tbody tr.failed td:nth-child(4) .payload-cell {
+  background: rgba(255, 249, 230, 1);
+}
+
+/* hover subtle */
+#resultsTable tbody tr:hover td { background: rgba(0,0,0,0.02); }
+
+/* scrollbar for payloads (WebKit) */
+#resultsTable td:nth-child(4) .payload-cell::-webkit-scrollbar {
+  height: 8px;
+}
+#resultsTable td:nth-child(4) .payload-cell::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+  border-radius: 6px;
+}
+
+/* table basics */
+#resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: auto; /* allow flexible widths */
+}
+/* neutral header (no warm color) */
+#resultsTable thead th {
+  /* make headers sticky so they remain visible while rows scroll */
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;          /* opaque background so rows don't show through */
+  color: #333;
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 1px solid #e6e6e6;
+  white-space: nowrap;
+  /* optional subtle drop shadow to separate header from rows */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+/* ensure the scroll container uses native momentum scrolling on mobile */
+.table-container {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Logout button: square stacked style like uploaded image */
+.logout-btn {
+  display: inline-flex;
+  flex-direction: column;      /* icon above label */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;                /* internal padding */
+  width: 72px;                 /* square card width */
+  height: 72px;                /* square card height */
+  background: linear-gradient(135deg,#ff6a6a 0%, #ff7f51 60%); /* warm gradient */
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(255,99,99,0.14), 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 160ms cubic-bezier(.2,.9,.2,1), box-shadow 160ms ease, filter 160ms ease, opacity 120ms ease;
+  line-height: 1;
+}
+.logout-btn .logout-icon { 
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+}
+.logout-btn .logout-icon svg { width: 20px; height: 20px; display:block; }
+
+/* label smaller and centered below icon */
+.logout-btn .logout-text {
+  font-size: 12px;
+  line-height: 1;
+  padding-top: 2px;
+  text-align: center;
+}
+
+/* hover / focus / active */
+.logout-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(255,99,99,0.18), 0 6px 12px rgba(0,0,0,0.10);
+}
+.logout-btn:active { transform: translateY(-1px) scale(0.995); }
+
+/* keyboard focus visible */
+.logout-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255,120,120,0.14), 0 12px 24px rgba(255,99,99,0.14);
+  transform: translateY(-3px);
+}
+
+/* logging-out state: subtle pulse and reduced opacity to indicate action */
+.logout-btn.logging {
+  pointer-events: none;
+  transform: scale(0.98);
+  opacity: 0.92;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+.logout-btn.logging .logout-text { opacity: 0.9; }
+
+/* small status dot (optional) — keep for future use */
+.logout-btn .status-dot { width:8px; height:8px; border-radius:50%; background:#fff; opacity:0; }
+
+/* ensure scan header alignment remains correct */
+.scan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Make the h2 in scan header a little smaller and flush */
+.scan-header h2 {
+  margin: 0;
+  font-size: 30px;
+  color: #2a7bdc;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* make the two small controls look like one connected control and increase sizes */
+.scan-controls {
+  display: flex;
+  gap: 0;                 /* buttons touch */
+  align-items: center;
+  border-radius: 12px;    /* slightly larger radius to match increased size */
+  overflow: hidden;       /* clip children radii */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* subtle shared shadow */
+}
+
+/* History (left) — slightly larger compact black square */
+.history-btn.square {
+  width: 38px;               /* increased from 44 */
+  height: 38px;
+  padding: 5px;
+  border-radius: 12px 0 0 12px;   /* round left corners only */
+  background: #0b0b0b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+.history-btn.square .history-icon {
+  width: 32px;               /* increased container */
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+}
+.history-btn.square .history-icon svg {
+  width: 28px;               /* increased glyph */
+  height: 28px;
+  stroke: #fff;
+  fill: #fff;
+  stroke-width: 2.0;
+}
+
+/* Logout (right) — slightly larger compact red square */
+.logout-btn.square {
+  width: 38px;               /* increased from 44 */
+  height: 38px;
+  padding: 5px;
+  border-radius: 0 12px 12px 0;   /* round right corners only */
+  background: linear-gradient(180deg,#eb2323,#f30e06);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border: none;
+  cursor: pointer;
+}
+.logout-btn.square .logout-icon {
+  width: 32px;               /* increased container */
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+}
+.logout-btn.square .logout-icon svg {
+  width: 28px;               /* increased glyph */
+  height: 28px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 3.0;
+}
+
+/* hide textual label to keep icon-only appearance */
+.logout-btn.square .logout-text { display: none; }
+
+/* subtle hover for both halves */
+.scan-controls button:hover { transform: translateY(-1px); }
+
+/* make the Back button in history smaller and subtle */
+#historyBack {
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  background: #f1f1f1 !important;
+  color: #222 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+/* History list improvements */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 2px;
+}
+
+/* Each entry is clickable and shows a concise row + snippet */
+.history-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eee;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.history-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* meta row: badge + title + timestamp */
+.history-entry .meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #1a2930;
+  font-size: 13px;
+}
+.history-entry .meta .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* status colors */
+.history-entry .meta .badge.SAFE { background: #e6f9ef; color: #0b6b3a; }
+.history-entry .meta .badge.VULNERABLE { background: #ffe8ee; color: #8b1f2c; }
+.history-entry .meta .badge.SUSPICIOUS { background: #fff5e6; color: #7a4f00; }
+.history-entry .meta .badge.FAILED { background: #fff8dc; color: #6a4b00; }
+
+/* title / type/target and timestamp */
+.history-entry .meta .title { flex: 1; font-weight:700; color:#15466a; }
+.history-entry .meta .ts { margin-left: 8px; font-size:12px; color:#777; white-space:nowrap; }
+
+/* payload snippet (single-line ellipsis) */
+.history-entry .payload-snippet {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.95;
+}
+
+/* full payload hidden by default; revealed when .expanded */
+.history-entry .full-payload {
+  display: none;
+  background: #f9f9fb;
+  border-radius: 6px;
+  padding: 8px;
+  margin-top: 6px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: #222;
+  white-space: pre-wrap;
+  overflow: auto;
+  max-height: 220px;
+}
+
+/* expanded state */
+.history-entry.expanded {
+  background: #fff;
+}
+.history-entry.expanded .full-payload { display: block; }
+
+/* accessibility focus style */
+.history-entry:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(34,120,220,0.08);
+}
+
+/* ===== moved from popup.html (small fallbacks & view-specific tweaks) ===== */
+
+/* small adjustments to ensure scan view fits inside the popup (was inline in popup.html) */
+body { margin: 10px; width: auto; }
+
+/* forgot-password view: stop hero animation and slightly increase label/input spacing */
+#forgotView .hero-border { animation: none; }
+#forgotView label,
+#forgotView input {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Eye icon / password-field small spacing fallback (keeps layout consistent) */
+.password-field {
+  position: relative;
+  margin-top: 10px;
+}
+
+/* Minimal base for toggle-pass to ensure clickable area when not using the more detailed styles */
+.toggle-pass {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Toast container fallback positioning (JS may override this to anchor under hero) */
+#toast-container {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  width: auto;
+  max-width: 88%;
+  align-items: center;
+}
+
+/* Minimal toast base (JS adds classes like .success/.error) */
+.toast {
+  min-width: 200px;
+  max-width: 640px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(13, 71, 161, 0.12);
+}
+.toast.success { background: linear-gradient(90deg,#34c38f,#2eb86e); }
+.toast.error   { background: linear-gradient(90deg,#f46a6a,#d64545); }
+
+/* small header wrapper used in scan view */
+.scan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Scan session card (accordion) */
+.scan-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16,40,60,0.06);
+  margin-bottom: 10px;
+  overflow: hidden;
+  cursor: default;
+}
+.scan-card .scan-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.scan-card .scan-card-header:focus { outline: none; box-shadow: 0 0 0 4px rgba(34,120,220,0.06); }
+
+.scan-card .scan-card-header .url {
+  flex: 1 1 auto;
+  font-weight: 700;
+  color: #114a76;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+.scan-card .scan-card-header .date {
+  flex: 0 0 auto;
+  color: #777;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* action buttons on the right */
+.scan-card .scan-card-header .actions {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: 8px;
+}
+.scan-card .scan-card-header .actions button {
+  border: none;
+  background: #f3f4f6;
+  color: #333;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.scan-card .scan-card-header .actions button:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+.scan-card .scan-card-header .actions button.delete-btn { background: #ffefef; color:#c33; }
+
+/* body: hidden by default; revealed when card has .expanded */
+.scan-card .scan-card-body {
+  display: none;
+  padding: 10px 12px;
+  background: #fbfdff;
+  border-top: 1px solid #f0f3f6;
+}
+
+/* result rows inside a session */
+.history-result-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #f1f5f8;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 12px rgba(12,30,45,0.03);
+}
+.history-result-row .badge {
+  min-width: 64px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.history-result-row .result-meta {
+  flex: 1;
+  font-weight: 700;
+  color: #15466a;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.history-result-row .result-payload {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 12px;
+  color: #222;
+  background: transparent;
+  border: none;
+  white-space: pre-wrap;
+  margin: 6px 0 0 0;
+  padding: 0;
+  max-height: 120px;
+  overflow: auto;
+}
+
+/* reuse existing badge color classes if present */
+.history-result-row .badge.SAFE { background: #e6f9ef; color: #0b6b3a; }
+.history-result-row .badge.VULNERABLE { background: #ffe8ee; color: #8b1f2c; }
+.history-result-row .badge.SUSPICIOUS { background: #fff5e6; color: #7a4f00; }
+.history-result-row .badge.FAILED { background: #fff8dc; color: #6a4b00; }
+
+/* ensure history list scrolls as a whole */
+#historyPageList {
+  max-height: 320px;
+  overflow: auto;
+  padding: 6px 2px;
+}
+
+/* small accessibility */
+.scan-card[tabindex] { outline: none; }
+
+/* ===== end moved block ===== */

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "SecuriScanX",
+  "version": "1.2",
+  "description": "Harden your input points - detect SQLi, XSS & CMDi within seconds.",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["<all_urls>"]
+}

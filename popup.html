@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SecuriScanX</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Login view -->
+  <div id="loginView" class="container">
+    <div class="left">
+      <div class="hero-border">
+        <div class="hero-center">
+          <h1 class="hero-title">SecuriScanX</h1>
+          <p class="hero-slogan">Harden your input points — detect SQLi, XSS &amp; CMDi within seconds.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <h2>Login</h2>
+        <div class="sub">Login to scan the current page — then tap Start Scan.</div>
+
+        <label for="username">Email</label>
+        <input id="username" type="email" placeholder="Enter email" />
+
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input id="password" type="password" placeholder="Enter password" />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <!-- simple inline eye SVG -->
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#e74c3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <div class="row" style="align-items:center;margin-top:10px;">
+          <input id="rememberMe" type="checkbox" />
+          <label for="rememberMe" class="remember" style="margin-left:8px;">Remember me</label>
+        </div>
+
+        <button id="loginBtn" class="login-btn">LOGIN</button>
+
+        <div class="links-footer" style="margin-top:18px;">
+          <div class="left-link">New User? <a id="signupLink" href="#">Signup</a></div>
+          <div class="right-link"><a id="forgotLink" href="#">Forgot your password?</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup view (hidden) -->
+  <div id="signupView" class="container" style="display:none;">
+    <div class="left">
+      <div class="hero-border">
+        <div class="hero-center">
+          <h1 class="hero-title">Create Account</h1>
+          <p class="hero-slogan">Create your SecuriScanX account — you'll be able to run scans after signup.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <h2>Signup</h2>
+        <div class="sub">Enter details to create your account for the extension.</div>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Enter email" />
+
+        <label for="signupPassword">Password</label>
+        <div class="password-field">
+          <input id="signupPassword" type="password" placeholder="Enter password" />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#e74c3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-field">
+          <input id="confirmPassword" type="password" placeholder="Confirm password" />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#e74c3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <div class="row" style="align-items:center;margin-top:10px;">
+          <input id="signupRemember" type="checkbox" />
+          <label for="signupRemember" class="remember" style="margin-left:8px;">Remember me</label>
+        </div>
+
+        <button id="signupBtn" class="login-btn">SIGNUP</button>
+        <div style="margin-top:10px;font-size:13px;">
+          <a href="#" id="backToLogin">Back to Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password view (hidden) -->
+  <div id="forgotView" class="container" style="display:none;">
+    <div class="left">
+      <div class="hero-border">
+        <div class="hero-center">
+          <h1 class="hero-title">Forgot Password</h1>
+          <p class="hero-slogan">Enter your account email to reset the password.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <h2>Reset Password</h2>
+        <div class="sub">Provide the email used for signup and choose a new password.</div>
+
+        <label for="forgotEmail">Email</label>
+        <input id="forgotEmail" type="email" placeholder="Enter your email" />
+
+        <label for="forgotNewPassword">New Password</label>
+        <div class="password-field">
+          <input id="forgotNewPassword" type="password" placeholder="Enter new password" />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#e74c3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <label for="forgotConfirmPassword">Confirm Password</label>
+        <div class="password-field">
+          <input id="forgotConfirmPassword" type="password" placeholder="Confirm new password" />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#e74c3c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <div class="row" style="align-items:center;margin-top:10px;">
+          <input id="forgotRemember" type="checkbox" />
+          <label for="forgotRemember" class="remember" style="margin-left:8px;">Remember me</label>
+        </div>
+
+        <button id="forgotBtn" class="login-btn">RESET PASSWORD</button>
+        <div style="margin-top:10px;font-size:13px;">
+          <a href="#" id="backFromForgot">Back to Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scan view (hidden until login) -->
+  <div id="scanView" class="container" style="display:none;">
+    <div class="left" style="flex: 0 0 100%; padding: 18px;">
+      <div class="hero-border">
+        <div class="hero-center" style="padding:12px 8px;">
+          <h1 class="hero-title" style="font-size:30px;">SecuriScanX</h1>
+          <p class="hero-slogan" style="font-size:13px;max-width:560px;">Harden your input points — detect SQLi, XSS &amp; CMDi within seconds.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right" style="flex: 0 0 100%; padding:16px;">
+      <div class="card" style="width:100%; padding:12px;">
+        <div class="scan-header" style="margin-bottom:8px;">
+          <h2>Scanner</h2>
+          <div class="scan-controls" style="display:flex;gap:8px;align-items:center;">
+            <!-- History button (icon-only) -->
+            <button id="historyBtn" class="history-btn square" title="History" aria-label="History">
+              <span class="history-icon" aria-hidden="true">
+                <!-- clock icon (white) -->
+                <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="img" preserveAspectRatio="xMidYMid meet">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="1.8"/>
+                  <!-- hour hand -->
+                  <line x1="12" y1="12" x2="15" y2="9" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                  <!-- minute hand -->
+                  <line x1="12" y1="12" x2="12" y2="7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                  <!-- small ticks at 12/3/6/9 -->
+                  <line x1="12" y1="3.5" x2="12" y2="5" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="18.5" y1="12" x2="17" y2="12" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="12" y1="20.5" x2="12" y2="19" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                  <line x1="5.5" y1="12" x2="7" y2="12" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+
+            <!-- Logout button -->
+            <button id="logoutBtn" class="logout-btn square" title="Logout" aria-label="Logout">
+              <span class="logout-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false" aria-hidden="true">
+                  <path d="M32 18 L32 30" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M24 34 A8 8 0 1 0 40 34" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="button-group" style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+          <button id="scan" class="login-btn no-transform" style="padding:8px 12px;width:auto;" aria-label="start scan">Start Scan</button>
+          <button id="exportBtn" class="login-btn no-transform" style="padding:8px 12px;width:auto;background: #666;" aria-label="export results">Export Results</button>
+          <select id="filter" style="margin-left:auto;padding:8px;border-radius:6px;border:1px solid #ddd;">
+            <option value="" disabled selected>Filter Results</option>
+            <option value="ALL">All</option>
+            <option value="SAFE">SAFE</option>
+            <option value="VULNERABLE">VULNERABLE</option>
+            <option value="SUSPICIOUS">SUSPICIOUS</option>
+            <option value="FAILED">FAILED</option>
+          </select>
+        </div>
+
+        <div class="table-container" style="max-height:180px;overflow:auto;border-radius:6px;border:1px solid #eee;padding:6px;background:#fafafa;">
+          <table id="resultsTable" style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr style="text-align:left;font-weight:700;border-bottom:1px solid #e6e6e6;">
+                <th style="padding:8px;">Status</th>
+                <th style="padding:8px;">Type</th>
+                <th style="padding:8px;">Target</th>
+                <th style="padding:8px;">Payload</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- History view (hidden until requested) -->
+  <div id="historyView" class="container" style="display:none;">
+    <div class="left">
+      <div class="hero-border">
+        <div class="hero-center">
+          <!-- Reuse same hero title + slogan as login to provide consistent header -->
+          <h1 class="hero-title">SecuriScanX</h1>
+          <p class="hero-slogan">Harden your input points — detect SQLi, XSS &amp; CMDi within seconds.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <h2>Scan History</h2>
+          <div>
+            <button id="historyBack" class="login-btn no-transform" style="padding:8px 12px;width:auto;background:#ccc;color:#111;">Back</button>
+          </div>
+        </div>
+
+        <div id="historyPageList" class="history-list" style="max-height:320px;overflow:auto;padding:6px 0;">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
